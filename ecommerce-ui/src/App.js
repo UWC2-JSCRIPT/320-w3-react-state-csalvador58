@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 import './App.css';
 import NavHeader from './layout/NavHeader'
+import BnbRental from './components/BnbRental';
+import GridContainer from './UI/GridContainer';
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
   return (
     <div className="App">
       <NavHeader />
+      <GridContainer />
+      
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
