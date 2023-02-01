@@ -4,31 +4,55 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  Grid,
   Typography,
 } from "@mui/material/";
+import PropTypes from "prop-types";
 
-function BnbRental() {
+function BnbRental({ imageAlt, title, image, location, paymentInfo }) {
+  const rentalLocation = `${location.city}, ${location.country}`;
+  const paymentCost = `Fees: ${paymentInfo.cost}/day`;
+  const paymentNote = `${paymentInfo.description}`;
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          // image="/static/images/cards/contemplative-reptile.jpg"
-          src="https://images.unsplash.com/photo-1490806230066-f7e6f7bf5052?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2ca889535ea01f912f94ac4ddf0034e0&auto=format&fit=crop&w=500&q=80"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Centrally-located Manhattan studio
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Apartment
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <Grid container>
+      <Grid item xs={12} >
+        <Card sx={{ minWidth: 345, maxWidth: 500}}>
+          <CardMedia
+            component="img"
+            // height="fitContent"
+            // image="/static/images/cards/contemplative-reptile.jpg"
+            src={image}
+            alt={imageAlt}
+          />
+        </Card>
+      </Grid>
+      <Grid item xs={12}>
+        <Card sx={{ minWidth: 345, maxWidth: 500}}>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {rentalLocation}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {paymentCost}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {paymentNote}
+            </Typography>
+          </CardContent>
+          {/* <CardActionArea>
+            Will enter action items/icons here
+          </CardActionArea> */}
+        </Card>
+      </Grid>
+    </Grid>
   );
 }
 
 export default BnbRental;
+
+BnbRental.propTypes = {
+  imageAlt: PropTypes.string.isRequired,
+};
