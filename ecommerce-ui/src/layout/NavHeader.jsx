@@ -56,7 +56,7 @@ function NavHeader() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, marginBottom: 5, minWidth: '360px'}}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -79,7 +79,7 @@ function NavHeader() {
 
           {/* Box will align cart icon to right of screen */}
           <Box sx={{ flexGrow: 1 }} />
-          
+
           <Box
           //   sx={{ display: { xs: 'none', md: 'flex' } }}
           >

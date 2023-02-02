@@ -26,13 +26,15 @@ function App() {
   // In order to facilitate the "Shopping Cart" functionality, each vacation rental should have a button that allows the user to add a vacation rental to the shopping cart.
   const bnbRentals = bnbData.map((rental, index) => {
     return (
-      <Grid key={index} item xs={12} sm={6} md={4}>
+      <Grid key={index} item xs={12} sm={6} md={4} lg={4} xl={3}>
         <BnbRental
           imageAlt="null"
-          title={rental.title}
+          houseType={rental.houseType}
           image={rental.image}
           location={rental.location}
           paymentInfo={rental.payment}
+          stars={rental.rating.stars}
+          title={rental.title}
         />
       </Grid>
     );
@@ -41,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <NavHeader />
-      <GridContainer spacing={5}>{bnbRentals}</GridContainer>
+      <GridContainer spacing={1}>{bnbRentals}</GridContainer>
 
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
