@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <NavHeader />
-      <GridContainer spacing={1}>{bnbRentals}</GridContainer>
+      <GridContainer spacing={2} columns={12}>{bnbRentals}</GridContainer>
 
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

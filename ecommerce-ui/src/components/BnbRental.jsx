@@ -7,6 +7,7 @@ import {
   CardMedia,
   Grid,
   IconButton,
+  Paper,
   Typography,
 } from "@mui/material/";
 import PropTypes from "prop-types";
@@ -27,31 +28,42 @@ function BnbRental({
   const paymentCost = `$${paymentInfo.cost}/day`;
   const paymentNote = `${paymentInfo.description}`;
   return (
-    // <Grid container>
-
-    <Grid item xs={12} padding={"5%"}>
+    <>
       <Card
-        sx={{
-          minWidth: { xs: "345px", sm: "45vw", md: "25vw" },
-          maxWidth: { xs: "90vw", sm: "50vw", md: "35vw" },
-          height: { xs: "50vh", sm: "50vh", md: "55vh" },
-        }}
+        elevation={0}
+        sx={
+          {
+            // minWidth: { xs: "345px", sm: "45vw", md: "25vw", xl: "20vw" },
+            // maxWidth: { xs: "90vw", sm: "50vw", md: "35vw", xl: "30vw" },
+            // height: { xs: "50vh", sm: "40vh", md: "40vh" },
+          }
+        }
       >
-        <CardMedia
-          component="img"
-          src={image}
-          alt={imageAlt}
-          sx={{
-            height: { xs: "55%", sm: "50%", md: "60%" },
-          }}
-        />
+        {/* <Card elevation={8}> */}
+        <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+          <CardMedia
+            component="img"
+            src={image}
+            alt={imageAlt}
+            sx={{width: "90%", boxShadow: "0px 10px 10px 0px rgba(0,0,0,0.75)"}}
+            // sx={{
+            //   height: { xs: "80%", sm: "50%", md: "60%" },
+            // }}
+          />
+        </Box>
+        {/* </Card> */}
         <CardContent
-          sx={{ height: { xs: "45%", sm: "50%", md: "40%" }, paddingX: 4 }}
+          sx={{
+            // height: { xs: "20%", sm: "50%", md: "40%" },
+            paddingX: 3,
+            // objectFit: "scale-down",
+            // justifyContent: "space-evenly"
+          }}
         >
           <Typography variant="h6" component="h1" paddingBottom={2}>
             {title}
           </Typography>
-          <Grid container direction="row" justifyContent="space-between">
+          <Grid container direction="row">
             <Grid item container justifyContent="space-between">
               <Typography
                 variant="body2"
@@ -93,7 +105,7 @@ function BnbRental({
           </Grid>
         </CardContent>
       </Card>
-    </Grid>
+    </>
   );
 }
 

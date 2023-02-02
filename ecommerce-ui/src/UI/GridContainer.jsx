@@ -1,13 +1,20 @@
 import React from "react";
-import { Box, Grid } from "@mui/material/";
+import { Grid, Paper } from "@mui/material/";
 
-function GridContainer({children, spacing}) {
+function GridContainer({ children, spacing, columns }) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={spacing}>
-       {children}
+    <Paper
+      sx={{
+        padding: 2,
+        flexGrow: 0,
+        elevation: 0,
+        minWidth: "345px",
+      }}
+    >
+      <Grid container spacing={spacing} columns={columns}>
+        {children}
       </Grid>
-    </Box>
+    </Paper>
   );
 }
 
