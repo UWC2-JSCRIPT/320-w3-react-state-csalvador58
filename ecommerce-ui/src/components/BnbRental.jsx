@@ -1,17 +1,8 @@
 import React from "react";
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Grid,
-  IconButton,
-  Paper,
-  Typography,
-} from "@mui/material/";
+import { Card, CardContent, Grid, Typography } from "@mui/material/";
 import PropTypes from "prop-types";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import AddToCart from "./AddToCart";
+import BnbRentalImage from "./BnbRentalImage";
 
 function BnbRental({
   imageAlt,
@@ -29,35 +20,11 @@ function BnbRental({
   const paymentNote = `${paymentInfo.description}`;
   return (
     <>
-      <Card
-        elevation={0}
-        sx={
-          {
-            // minWidth: { xs: "345px", sm: "45vw", md: "25vw", xl: "20vw" },
-            // maxWidth: { xs: "90vw", sm: "50vw", md: "35vw", xl: "30vw" },
-            // height: { xs: "50vh", sm: "40vh", md: "40vh" },
-          }
-        }
-      >
-        {/* <Card elevation={8}> */}
-        <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
-          <CardMedia
-            component="img"
-            src={image}
-            alt={imageAlt}
-            sx={{width: "90%", boxShadow: "0px 10px 10px 0px rgba(0,0,0,0.75)"}}
-            // sx={{
-            //   height: { xs: "80%", sm: "50%", md: "60%" },
-            // }}
-          />
-        </Box>
-        {/* </Card> */}
+      <Card elevation={0}>
+        <BnbRentalImage image={image} imageAlt={imageAlt} />
         <CardContent
           sx={{
-            // height: { xs: "20%", sm: "50%", md: "40%" },
             paddingX: 3,
-            // objectFit: "scale-down",
-            // justifyContent: "space-evenly"
           }}
         >
           <Typography variant="h6" component="h1" paddingBottom={2}>
@@ -85,6 +52,7 @@ function BnbRental({
                   variant="body2"
                   color="text.secondary"
                   textAlign={"left"}
+                  fontWeight="bold"
                 >
                   {paymentCost}
                 </Typography>
@@ -97,9 +65,7 @@ function BnbRental({
                 </Typography>
               </Grid>
               <Grid item>
-                <IconButton>
-                  <AddShoppingCartIcon fontSize="large" />
-                </IconButton>
+                <AddToCart />
               </Grid>
             </Grid>
           </Grid>
@@ -113,4 +79,16 @@ export default BnbRental;
 
 BnbRental.propTypes = {
   imageAlt: PropTypes.string.isRequired,
+  houseType: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    city: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+  }),
+  paymentInfo: PropTypes.shape({
+    cost: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+  }),
+  stars: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
 };

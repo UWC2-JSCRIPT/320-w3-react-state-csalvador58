@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Grid, Paper } from "@mui/material/";
 
 function GridContainer({ children, spacing, columns }) {
@@ -19,3 +20,9 @@ function GridContainer({ children, spacing, columns }) {
 }
 
 export default GridContainer;
+
+GridContainer.propTypes = {
+  children: PropTypes.array.isRequired,
+  spacing: PropTypes.number.isRequired,
+  columns: PropTypes.number.isRequired,
+};

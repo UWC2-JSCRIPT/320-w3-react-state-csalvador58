@@ -56,7 +56,7 @@ function NavHeader() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1, marginBottom: 5, minWidth: '360px'}}>
+    <Box sx={{ flexGrow: 1, marginBottom: 3, minWidth: '360px'}}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -89,7 +89,7 @@ function NavHeader() {
               color="inherit"
               //   onClick={handleCartOpen}
             >
-              <Badge badgeContent={cartCount || 4} color="error">
+              <Badge badgeContent={cartCount || 0} color="error">
                 <ShoppingCartIcon onClick={handleAnchor}/>
               </Badge>
             </IconButton>

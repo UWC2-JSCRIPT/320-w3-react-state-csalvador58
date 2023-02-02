@@ -5,6 +5,15 @@ import NavHeader from "./layout/NavHeader";
 import BnbRental from "./components/BnbRental";
 import GridContainer from "./UI/GridContainer";
 import bnbData from "./data/bnbs.json";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#7C4555",
+    },
+  },
+});
 
 function App() {
   // App requirements
@@ -41,25 +50,14 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <NavHeader />
-      <GridContainer spacing={2} columns={12}>{bnbRentals}</GridContainer>
-
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <NavHeader />
+        <GridContainer spacing={2} columns={12}>
+          {bnbRentals}
+        </GridContainer>
+      </div>
+    </ThemeProvider>
   );
 }
 
