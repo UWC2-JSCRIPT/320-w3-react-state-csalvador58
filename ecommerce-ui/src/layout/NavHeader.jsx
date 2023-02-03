@@ -10,30 +10,28 @@ import {
   Typography,
 } from "@mui/material/";
 
-import CottageIcon from '@mui/icons-material/Cottage';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CottageIcon from "@mui/icons-material/Cottage";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-
-function NavHeader() {
+function NavHeader({ cartCount }) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [cartCount, setCartCount] = useState(null);
+  // const [cartCount, setCartCount] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
 
   const handleAnchor = (event) => {
     // console.log('handle anchor clicked')
     setAnchorEl(event.currentTarget);
-    console.log("event current target: " + event.currentTarget)
-    console.log("anchorEl: " + anchorEl)
-    console.log("isMenuOpen: " + isMenuOpen)
+    console.log("event current target: " + event.currentTarget);
+    console.log("anchorEl: " + anchorEl);
+    console.log("isMenuOpen: " + isMenuOpen);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
-
-  const menuId = "primary-search-account-menu";
+  // const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -41,7 +39,7 @@ function NavHeader() {
         vertical: "top",
         horizontal: "right",
       }}
-      id={menuId}
+      // id={menuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
@@ -56,7 +54,7 @@ function NavHeader() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1, marginBottom: 3, minWidth: '360px'}}>
+    <Box sx={{ flexGrow: 1, marginBottom: 3, minWidth: "360px" }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -90,7 +88,7 @@ function NavHeader() {
               //   onClick={handleCartOpen}
             >
               <Badge badgeContent={cartCount || 0} color="error">
-                <ShoppingCartIcon onClick={handleAnchor}/>
+                <ShoppingCartIcon onClick={handleAnchor} />
               </Badge>
             </IconButton>
           </Box>

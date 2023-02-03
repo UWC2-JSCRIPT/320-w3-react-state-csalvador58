@@ -6,6 +6,7 @@ import BnbRental from "./components/BnbRental";
 import GridContainer from "./UI/GridContainer";
 import bnbData from "./data/bnbs.json";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import BnbShoppingCart from "./components/BnbShoppingCart";
 
 const theme = createTheme({
   palette: {
@@ -53,6 +54,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <NavHeader />
+        {true && <BnbShoppingCart />}
         <GridContainer spacing={2} columns={12}>
           {bnbRentals}
         </GridContainer>
