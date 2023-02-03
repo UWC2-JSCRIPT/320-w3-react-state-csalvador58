@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   AppBar,
   Badge,
   Box,
   IconButton,
-  Menu,
-  MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material/";
@@ -13,46 +11,7 @@ import {
 import CottageIcon from "@mui/icons-material/Cottage";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-function NavHeader({ cartCount }) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  // const [cartCount, setCartCount] = useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-
-  const handleAnchor = (event) => {
-    // console.log('handle anchor clicked')
-    setAnchorEl(event.currentTarget);
-    console.log("event current target: " + event.currentTarget);
-    console.log("anchorEl: " + anchorEl);
-    console.log("isMenuOpen: " + isMenuOpen);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  // const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      // id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>List BnB item here</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Edit Cart</MenuItem>
-    </Menu>
-  );
-
+function NavHeader({ cartCount, displayCart }) {
   return (
     <Box sx={{ flexGrow: 1, marginBottom: 3, minWidth: "360px" }}>
       <AppBar position="static">
@@ -78,23 +37,19 @@ function NavHeader({ cartCount }) {
           {/* Box will align cart icon to right of screen */}
           <Box sx={{ flexGrow: 1 }} />
 
-          <Box
-          //   sx={{ display: { xs: 'none', md: 'flex' } }}
-          >
+          <Box>
             <IconButton
               size="large"
               aria-label="show number of rentals in cart"
               color="inherit"
-              //   onClick={handleCartOpen}
             >
               <Badge badgeContent={cartCount || 0} color="error">
-                <ShoppingCartIcon onClick={handleAnchor} />
+                <ShoppingCartIcon onClick={displayCart} />
               </Badge>
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMenu}
     </Box>
   );
 }

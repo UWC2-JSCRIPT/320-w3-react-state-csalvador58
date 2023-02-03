@@ -22,11 +22,7 @@ function BnbRental({
     <>
       <Card elevation={0}>
         <BnbRentalImage image={image} imageAlt={imageAlt} />
-        <CardContent
-          sx={{
-            paddingX: 3,
-          }}
-        >
+        <CardContent sx={{ paddingX: 3 }}>
           <Typography variant="h6" component="h1" paddingBottom={2}>
             {title}
           </Typography>

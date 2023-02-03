@@ -1,4 +1,5 @@
 // import logo from './logo.svg';
+import React, { useState } from "react";
 import "./App.css";
 import { Grid } from "@mui/material/";
 import NavHeader from "./layout/NavHeader";
@@ -17,6 +18,12 @@ const theme = createTheme({
 });
 
 function App() {
+  const [displayCartFlag, setDisplayCartFlag] = useState(false);
+
+  const displayCart = () => {
+    setDisplayCartFlag((prevState) => !prevState);
+  };
+
   // App requirements
   // At minimum, your UI should display each Bnb's:
   // Title
@@ -53,8 +60,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <NavHeader />
-        {true && <BnbShoppingCart />}
+        <NavHeader displayCart={displayCart}/>
+        {displayCartFlag && <BnbShoppingCart displayCart={displayCart}/>}
         <GridContainer spacing={2} columns={12}>
           {bnbRentals}
         </GridContainer>

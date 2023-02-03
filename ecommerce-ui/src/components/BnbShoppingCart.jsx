@@ -1,9 +1,10 @@
-import React from "react";
-import { Box, List, Paper, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button, Fade, List, Paper, Typography } from "@mui/material";
 import bnbData from "../data/bnbs.json";
 import ListItems from "../UI/ListItems";
 
-function BnbShoppingCart() {
+function BnbShoppingCart({ displayCart }) {
+  const [cartTotal, setCartTotal] = useState(0);
   const cartItems = bnbData.map((bnb, index) => {
     return (
       <ListItems
@@ -16,21 +17,31 @@ function BnbShoppingCart() {
   });
 
   return (
-    <Box
-    minWidth="345px"
-      position="fixed"
-      top="75px"
-      right="10px"
-      width={{ xs: "90%", sm:"45%"}}
-      sx={{ zIndex: "5" }}
-    >
-      <Paper sx={{ backgroundColor: "#B97E8F", padding: 3, opacity: 0.95 }}>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          Items you added to the cart!
-        </Typography>
-        <List>{cartItems}</List>
-      </Paper>
-    </Box>
+    <Fade in="true" timeout={750}>
+      <Box
+        minWidth="345px"
+        // position={{xs: "static", sm: "relative"}}
+        // paddingX={{xs: 3}}
+        // top="1px"
+        // right="1px"
+        mt={-4}
+        width='100%'
+        // sx={{ zIndex: '-1'}}
+      >
+        <Paper sx={{ backgroundColor: "#B97E8F", padding: 5, opacity: 0.95 }}>
+          <Typography sx={{ mt: 2, mb: 2, fontWeight: 'bold'}} variant="h6" component="div">
+            Items you added to the cart!
+          </Typography>
+          <List>{cartItems}</List>
+          <Typography sx={{ mb: 2, fontWeight: 'bold'}} variant="h6" component="div">
+            Total Amount: ${cartTotal}
+          </Typography>
+          <Button variant="contained" onClick={displayCart}>
+            Close Cart
+          </Button>
+        </Paper>
+      </Box>
+    </Fade>
   );
 }
 
