@@ -5,10 +5,10 @@ import AddToCart from "./AddToCart";
 import BnbRentalImage from "./BnbRentalImage";
 
 function BnbRental({
-  id,
-  imageAlt,
   houseType,
+  id,
   image,
+  imageAlt,
   location,
   paymentInfo,
   stars,
@@ -19,10 +19,6 @@ function BnbRental({
   const rentalLocation = `${location.city}, ${location.country}`;
   const paymentCost = `$${paymentInfo.cost}/day`;
   const paymentNote = `${paymentInfo.description}`;
-
-  const cartButtonIsClicked = (buttonId) => {
-    console.log(buttonId)
-  }
 
   return (
     <>
@@ -67,7 +63,12 @@ function BnbRental({
                 </Typography>
               </Grid>
               <Grid item>
-                <AddToCart id={id} cartButtonAction={cartButtonIsClicked} />
+                <AddToCart
+                  id={id}
+                  title={title}
+                  fee={paymentInfo.cost}
+                  city={location.city}
+                />
               </Grid>
             </Grid>
           </Grid>
@@ -80,10 +81,10 @@ function BnbRental({
 export default BnbRental;
 
 BnbRental.propTypes = {
-  id: PropTypes.number.isRequired,
-  imageAlt: PropTypes.string.isRequired,
   houseType: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
+  imageAlt: PropTypes.string.isRequired,
   location: PropTypes.shape({
     city: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,

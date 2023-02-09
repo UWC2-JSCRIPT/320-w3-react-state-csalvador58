@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import RentalCartContext from "../store/RentalCartContext";
 import { Box, Button, Fade, List, Paper, Typography } from "@mui/material";
-import bnbData from "../data/bnbs.json";
 import ListItems from "../UI/ListItems";
+import PropTypes from "prop-types";
 
 function BnbShoppingCart({ displayCart }) {
-  const [cartTotal, setCartTotal] = useState(0);
-  const cartItems = bnbData.map((bnb, index) => {
+  const rentalCart = useContext(RentalCartContext);
+
+  const cartItems = rentalCart.rentals.map((rental) => {
     return (
       <ListItems
-        key={index}
-        title={bnb.title}
-        fee={bnb.payment.cost}
-        city={bnb.location.city}
+        key={rental.id}
+        title={rental.title}
+        fee={rental.fee}
+        city={rental.city}
       />
     );
   });
 
   return (
-    <Fade in="true" timeout={750}>
+    <Fade in={true} timeout={750}>
       <Box
         minWidth="345px"
         // position={{xs: "static", sm: "relative"}}
@@ -25,16 +27,24 @@ function BnbShoppingCart({ displayCart }) {
         // top="1px"
         // right="1px"
         mt={-4}
-        width='100%'
+        width="100%"
         // sx={{ zIndex: '-1'}}
       >
         <Paper sx={{ backgroundColor: "#B97E8F", padding: 5, opacity: 0.95 }}>
-          <Typography sx={{ mt: 2, mb: 2, fontWeight: 'bold'}} variant="h6" component="div">
+          <Typography
+            sx={{ mt: 2, mb: 2, fontWeight: "bold" }}
+            variant="h6"
+            component="div"
+          >
             Items you added to the cart!
           </Typography>
           <List>{cartItems}</List>
-          <Typography sx={{ mb: 2, fontWeight: 'bold'}} variant="h6" component="div">
-            Total Amount: ${cartTotal}
+          <Typography
+            sx={{ mb: 2, fontWeight: "bold" }}
+            variant="h6"
+            component="div"
+          >
+            Total Amount: ${rentalCart.totalCost}
           </Typography>
           <Button variant="contained" onClick={displayCart}>
             Close Cart
@@ -46,3 +56,7 @@ function BnbShoppingCart({ displayCart }) {
 }
 
 export default BnbShoppingCart;
+
+BnbShoppingCart.propTypes = {
+  displayCart: PropTypes.func.isRequired,
+};

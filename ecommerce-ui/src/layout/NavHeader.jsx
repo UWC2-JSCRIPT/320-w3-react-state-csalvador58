@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import RentalCartContext from "../store/RentalCartContext";
 import {
   AppBar,
   Badge,
@@ -7,11 +8,16 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material/";
+import PropTypes from "prop-types";
 
 import CottageIcon from "@mui/icons-material/Cottage";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-function NavHeader({ cartCount, displayCart }) {
+function NavHeader({ displayCart }) {
+  const rentalCart = useContext(RentalCartContext);
+
+  const rentalsInCart = rentalCart.rentals.length;
+
   return (
     <Box sx={{ flexGrow: 1, marginBottom: 3, minWidth: "360px" }}>
       <AppBar position="static">
@@ -43,7 +49,7 @@ function NavHeader({ cartCount, displayCart }) {
               aria-label="show number of rentals in cart"
               color="inherit"
             >
-              <Badge badgeContent={cartCount || 0} color="error">
+              <Badge badgeContent={rentalsInCart} color="error">
                 <ShoppingCartIcon onClick={displayCart} />
               </Badge>
             </IconButton>
@@ -55,3 +61,7 @@ function NavHeader({ cartCount, displayCart }) {
 }
 
 export default NavHeader;
+
+NavHeader.propTypes = {
+  displayCart: PropTypes.func.isRequired,
+};

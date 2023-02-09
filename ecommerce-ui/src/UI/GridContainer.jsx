@@ -22,7 +22,7 @@ function GridContainer({ children, spacing, columns }) {
 export default GridContainer;
 
 GridContainer.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.node.isRequired,
   spacing: PropTypes.number.isRequired,
   columns: PropTypes.number.isRequired,
 };

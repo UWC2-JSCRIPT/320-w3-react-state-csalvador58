@@ -1,13 +1,13 @@
 // import logo from './logo.svg';
 import React, { useState } from "react";
-import "./App.css";
-import { Grid } from "@mui/material/";
-import NavHeader from "./layout/NavHeader";
-import BnbRental from "./components/BnbRental";
-import GridContainer from "./UI/GridContainer";
-import bnbData from "./data/bnbs.json";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Grid } from "@mui/material/";
+import BnbRental from "./components/BnbRental";
 import BnbShoppingCart from "./components/BnbShoppingCart";
+import GridContainer from "./UI/GridContainer";
+import NavHeader from "./layout/NavHeader";
+import RentalCartProvider from "./store/RentalCartProvider";
+import bnbData from "./data/bnbs.json";
 
 const theme = createTheme({
   palette: {
@@ -60,13 +60,13 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <NavHeader displayCart={displayCart}/>
-        {displayCartFlag && <BnbShoppingCart displayCart={displayCart}/>}
+      <RentalCartProvider>
+        <NavHeader displayCart={displayCart} />
+        {displayCartFlag && <BnbShoppingCart displayCart={displayCart} />}
         <GridContainer spacing={2} columns={12}>
           {bnbRentals}
         </GridContainer>
-      </div>
+      </RentalCartProvider>
     </ThemeProvider>
   );
 }

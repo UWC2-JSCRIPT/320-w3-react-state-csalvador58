@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import RentalCartContext from "../store/RentalCartContext";
+import PropTypes from "prop-types";
 
-function AddToCart({ id, cartButtonAction }) {
+function AddToCart({ id, title, fee, city }) {
+  const rentalCart = useContext(RentalCartContext);
+
   const onClickHandler = () => {
-    cartButtonAction(id)
-  }
+    rentalCart.addRental({
+      id: id,
+      title: title,
+      fee: fee,
+      city: city,
+    });
+  };
 
   return (
     <IconButton onClick={() => onClickHandler()}>
@@ -16,10 +25,17 @@ function AddToCart({ id, cartButtonAction }) {
         alignItems={"center"}
       >
         <AddShoppingCartIcon fontSize="large" />
-        <Typography >Add to Cart</Typography>
+        <Typography>Add to Cart</Typography>
       </Grid>
     </IconButton>
   );
 }
 
 export default AddToCart;
+
+AddToCart.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  fee: PropTypes.number.isRequired,
+  city: PropTypes.string.isRequired,
+};
