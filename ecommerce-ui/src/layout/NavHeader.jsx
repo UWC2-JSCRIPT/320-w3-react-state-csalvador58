@@ -48,9 +48,10 @@ function NavHeader({ displayCart }) {
               size="large"
               aria-label="show number of rentals in cart"
               color="inherit"
+              onClick={displayCart}
             >
               <Badge badgeContent={rentalsInCart} color="error">
-                <ShoppingCartIcon onClick={displayCart} />
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
           </Box>

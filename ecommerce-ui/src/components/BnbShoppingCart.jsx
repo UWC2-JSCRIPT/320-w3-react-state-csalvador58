@@ -36,7 +36,7 @@ function BnbShoppingCart({ displayCart }) {
             variant="h6"
             component="div"
           >
-            Items you added to the cart!
+            {rentalCart.rentals.length ? `Items you added to the cart!`: `Cart is empty.`}
           </Typography>
           <List>{cartItems}</List>
           <Typography
