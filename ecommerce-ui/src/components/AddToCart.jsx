@@ -2,9 +2,13 @@ import React from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-function AddToCart() {
+function AddToCart({ id, cartButtonAction }) {
+  const onClickHandler = () => {
+    cartButtonAction(id)
+  }
+
   return (
-    <IconButton>
+    <IconButton onClick={() => onClickHandler()}>
       <Grid
         container
         direction={"column"}
@@ -12,7 +16,7 @@ function AddToCart() {
         alignItems={"center"}
       >
         <AddShoppingCartIcon fontSize="large" />
-        <Typography>Add to Cart</Typography>
+        <Typography >Add to Cart</Typography>
       </Grid>
     </IconButton>
   );
