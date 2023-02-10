@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import RentalCartContext from "../store/RentalCartContext";
+import RentalCartContext from "../../store/RentalCartContext";
 import PropTypes from "prop-types";
 
 function AddToCart({ id, title, fee, city }) {
@@ -17,14 +17,14 @@ function AddToCart({ id, title, fee, city }) {
   };
 
   return (
-    <IconButton onClick={onClickHandler}>
+    <IconButton aria-label='add rental to cart' onClick={onClickHandler}>
       <Grid
         container
         direction={"column"}
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <AddShoppingCartIcon fontSize="large" />
+        <AddShoppingCartIcon title="shopping cart" fontSize="large" />
         <Typography>Add to Cart</Typography>
       </Grid>
     </IconButton>

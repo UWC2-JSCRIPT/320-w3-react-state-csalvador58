@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import RentalCartContext from "../store/RentalCartContext";
 import { Box, Button, Fade, List, Paper, Typography } from "@mui/material";
-import ListItems from "../UI/ListItems";
+import RentalsInCart from "./RentalsInCart";
 import PropTypes from "prop-types";
 
 function BnbShoppingCart({ displayCart }) {
@@ -9,7 +9,7 @@ function BnbShoppingCart({ displayCart }) {
 
   const cartItems = rentalCart.rentals.map((rental, index) => {
     return (
-      <ListItems
+      <RentalsInCart
         key={index}
         title={rental.title}
         fee={rental.fee}
@@ -21,27 +21,20 @@ function BnbShoppingCart({ displayCart }) {
 
   return (
     <Fade in={true} timeout={750}>
-      <Box
-        minWidth="345px"
-        // position={{xs: "static", sm: "relative"}}
-        // paddingX={{xs: 3}}
-        // top="1px"
-        // right="1px"
-        mt={-4}
-        width="100%"
-        // sx={{ zIndex: '-1'}}
-      >
-        <Paper sx={{ backgroundColor: "#B97E8F", padding: 5, opacity: 0.95 }}>
+      <Box minWidth="345px" mt={-4} width="100%">
+        <Paper sx={{ backgroundColor: 'custom.background', padding: 5, opacity: 0.95 }}>
           <Typography
             sx={{ mt: 2, mb: 2, fontWeight: "bold" }}
             variant="h6"
             component="div"
           >
-            {rentalCart.rentals.length ? `Items you added to the cart!`: `Your cart is empty. Are you sure you don't need a place to stay?`}
+            {rentalCart.rentals.length
+              ? `Items you added to the cart!`
+              : `Your cart is empty. Are you sure you don't need a place to stay?`}
           </Typography>
           <List>{cartItems}</List>
           <Typography
-            sx={{ mb: 2, fontWeight: "bold" }}
+            sx={{ mb: 2, fontWeight: rentalCart.totalCost ? "bold" : "light" }}
             variant="h6"
             component="div"
           >

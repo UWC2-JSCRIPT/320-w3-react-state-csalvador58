@@ -7,7 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import PropTypes from "prop-types";
 import { Fade } from "@mui/material";
 
-export default function ListItems({ title, fee, city, length }) {
+export default function RentalsInCart({ title, fee, city, length }) {
   const rentalCart = useContext(RentalCartContext);
 
   const onClickHandler = () => {
@@ -39,7 +39,7 @@ export default function ListItems({ title, fee, city, length }) {
   );
 }
 
-ListItems.propTypes = {
+RentalsInCart.propTypes = {
   title: PropTypes.string.isRequired,
   fee: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, Grid, Typography } from "@mui/material/";
 import PropTypes from "prop-types";
-import BnbRentalImage from "../BnbRentalImage";
+import BnbRentalImage from "./BnbRentalImage";
 import BnbRentalContent1 from "./BnbRentalContent1";
 import BnbRentalContent2 from "./BnbRentalContent2";
 
