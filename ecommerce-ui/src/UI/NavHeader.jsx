@@ -6,13 +6,15 @@ import {
   Box,
   IconButton,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material/";
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import CottageIcon from "@mui/icons-material/Cottage";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PropTypes from "prop-types";
 
-function NavHeader({ displayCart }) {
+function NavHeader({ displayCart, displayForm }) {
   const rentalCart = useContext(RentalCartContext);
   const numberOfRentalsInCart = rentalCart.rentals.length;
 
@@ -42,16 +44,30 @@ function NavHeader({ displayCart }) {
           <Box sx={{ flexGrow: 1 }} />
 
           <Box>
-            <IconButton
-              size="large"
-              aria-label="show number of rentals in cart"
-              color="inherit"
-              onClick={displayCart}
-            >
-              <Badge badgeContent={numberOfRentalsInCart} color="error">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
+            <Tooltip title="Add Rental">
+              <IconButton
+                size="large"
+                aria-label="add a rental to rent out"
+                color="inherit"
+                onClick={displayForm}
+              >
+                <AddBusinessIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+          <Box>
+            <Tooltip title="Show Cart">
+              <IconButton
+                size="large"
+                aria-label="show number of rentals in cart"
+                color="inherit"
+                onClick={displayCart}
+              >
+                <Badge badgeContent={numberOfRentalsInCart} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </AppBar>
@@ -63,4 +79,5 @@ export default NavHeader;
 
 NavHeader.propTypes = {
   displayCart: PropTypes.func.isRequired,
+  displayForm: PropTypes.func.isRequired,
 };

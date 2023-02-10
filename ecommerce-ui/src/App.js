@@ -4,6 +4,7 @@ import { Grid, Paper } from "@mui/material/";
 import BnbRental from "./components/bnbRentalCard/BnbRental";
 import BnbShoppingCart from "./components/BnbShoppingCart";
 import NavHeader from "./UI/NavHeader";
+import RentalForm from "./components/rentalForm/RentalForm";
 import RentalCartProvider from "./store/RentalCartProvider";
 import bnbData from "./data/bnbs.json";
 
@@ -12,14 +13,19 @@ const theme = createTheme({
     primary: {
       main: "#7C4555",
     },
-    custom: {
-      background: "#B97E8F",
+    customBg: {
+      main: "#B97E8F",
+      alt: "#F9E79F",
     },
+    customBtn: {
+      main: "#F5B041"
+    }
   },
 });
 
 function App() {
   const [displayCartFlag, setDisplayCartFlag] = useState(false);
+  const [displayFormFlag, setDisplayFormFlag] = useState(false);
 
   const imageAltDescriptions = {
     "Centrally-located Manhattan studio": "Manhattan skyline at night.",
@@ -28,8 +34,18 @@ function App() {
       "White residential building with blue exterior window shutters",
   };
 
-  const toggleDisplay = () => {
+  const toggleCartDisplay = () => {
+    if (displayFormFlag) {
+      setDisplayFormFlag((prevState) => !prevState);
+    }
     setDisplayCartFlag((prevState) => !prevState);
+  };
+
+  const toggleFormDisplay = () => {
+    if (displayCartFlag) {
+      setDisplayCartFlag((prevState) => !prevState);
+    }
+    setDisplayFormFlag((prevState) => !prevState);
   };
 
   // App requirements
@@ -50,7 +66,9 @@ function App() {
   // done - Display the total payment due based on the vacation rentals in the cart
   // done - In order to facilitate the "Shopping Cart" functionality, each vacation rental should have a button that allows the user to add a vacation rental to the shopping cart.
   const bnbRentals = bnbData.map((rental, index) => {
-    const altText = !rental.alt ? imageAltDescriptions[rental.title] : rental.alt;
+    const altText = !rental.alt
+      ? imageAltDescriptions[rental.title]
+      : rental.alt;
 
     return (
       <Grid item key={index} xs={12} sm={6} md={4} lg={4} xl={3}>
@@ -71,8 +89,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <RentalCartProvider>
-        <NavHeader displayCart={toggleDisplay} />
-        {displayCartFlag && <BnbShoppingCart displayCart={toggleDisplay} />}
+        <NavHeader
+          displayCart={toggleCartDisplay}
+          displayForm={toggleFormDisplay}
+        />
+        {displayCartFlag && <BnbShoppingCart displayCart={toggleCartDisplay} />}
+        {displayFormFlag && <RentalForm displayForm={toggleFormDisplay} />}
         <Paper
           sx={{
             padding: 2,
