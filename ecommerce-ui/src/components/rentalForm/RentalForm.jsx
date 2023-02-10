@@ -31,8 +31,8 @@ export default function RentalForm({ displayForm }) {
   const inputChangeHandler = (event) => {
     console.log(event.target);
     const { name, value } = event.target;
-    console.log(name)
-    console.log(value)
+    console.log(name);
+    console.log(value);
     setFormValues({ ...formValues, [name]: value });
   };
 
@@ -49,7 +49,7 @@ export default function RentalForm({ displayForm }) {
           variant="h6"
           component="div"
         >
-          Have a place to rent out? Enter you rental information below.
+          Have a place to rent out? Enter your rental information below.
         </Typography>
         <Grid container spacing={2} direction="column" columns={12}>
           <Grid item xs={12}>
@@ -137,7 +137,7 @@ export default function RentalForm({ displayForm }) {
           </Grid>
 
           <Grid item>
-            <FormControl sx={{ width: "50vw" }}>
+            <FormControl sx={{ width: { xs: "100%", sm: "48%" } }}>
               <InputLabel htmlFor="rental-cost">
                 Total rental fees per day in USD
               </InputLabel>
@@ -161,7 +161,12 @@ export default function RentalForm({ displayForm }) {
             />
           </Grid>
         </Grid>
-        <Button color="customBtn" variant="contained" type="submit" sx={{ margin: "2rem" }}>
+        <Button
+          color="customBtn"
+          variant="contained"
+          type="submit"
+          sx={{ margin: "2rem 2rem 2rem 0" }}
+        >
           Submit Rental
         </Button>
         <Button variant="contained" onClick={displayForm}>

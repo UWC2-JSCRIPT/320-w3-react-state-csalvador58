@@ -11,15 +11,11 @@ export default function RentalCartProvider({ children }) {
       const rentalIndex = currentRentals.findIndex(
         (bnb) => bnb.title === newRental.title
       );
-      // console.log(rentalIndex);
       if (rentalIndex < 0) {
-        console.log("Rental does not exist");
-
         return [...currentRentals, newRental];
       } else {
         const updateState = [...currentRentals];
         updateState[rentalIndex].numberOfDays += 1;
-        // console.log(updateState);
         return updateState;
       }
     });

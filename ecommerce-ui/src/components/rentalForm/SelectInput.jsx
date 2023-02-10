@@ -3,7 +3,7 @@ import React from "react";
 
 export default function SelectInput({ freeCancel, inputChange }) {
   return (
-    <FormControl sx={{width: '50vw'}}>
+    <FormControl sx={{ width: { xs: "100%", sm: "48%" } }}>
       <FormLabel>Offer free cancellation?</FormLabel>
       <Select name="description" value={freeCancel} onChange={inputChange}>
         <MenuItem key="yes" value="free cancellation">
@@ -13,7 +13,7 @@ export default function SelectInput({ freeCancel, inputChange }) {
           No
         </MenuItem>
         <MenuItem key="other" value="Contact to discuss cancellation options">
-        Contact to discuss cancellation options.
+          Contact to discuss cancellation options.
         </MenuItem>
       </Select>
     </FormControl>
