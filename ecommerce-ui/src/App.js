@@ -15,10 +15,10 @@ const theme = createTheme({
     },
     customBg: {
       main: "#B97E8F",
-      alt: "#F9E79F",
+      alt: "#D6EAF8",
     },
     customBtn: {
-      main: "#F5B041"
+      main: "#5499C7"
     }
   },
 });
