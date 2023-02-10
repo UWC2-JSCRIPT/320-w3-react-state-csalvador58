@@ -8,15 +8,13 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material/";
-import PropTypes from "prop-types";
-
 import CottageIcon from "@mui/icons-material/Cottage";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PropTypes from "prop-types";
 
 function NavHeader({ displayCart }) {
   const rentalCart = useContext(RentalCartContext);
-
-  const rentalsInCart = rentalCart.rentals.length;
+  const numberOfRentalsInCart = rentalCart.rentals.length;
 
   return (
     <Box sx={{ flexGrow: 1, marginBottom: 3, minWidth: "360px" }}>
@@ -50,7 +48,7 @@ function NavHeader({ displayCart }) {
               color="inherit"
               onClick={displayCart}
             >
-              <Badge badgeContent={rentalsInCart} color="error">
+              <Badge badgeContent={numberOfRentalsInCart} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

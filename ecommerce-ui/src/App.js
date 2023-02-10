@@ -1,11 +1,9 @@
-// import logo from './logo.svg';
 import React, { useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Grid } from "@mui/material/";
-import BnbRental from "./components/BnbRental";
+import { Grid, Paper } from "@mui/material/";
+import BnbRental from "./components/bnbRentalCard/BnbRental";
 import BnbShoppingCart from "./components/BnbShoppingCart";
-import GridContainer from "./UI/GridContainer";
-import NavHeader from "./layout/NavHeader";
+import NavHeader from "./UI/NavHeader";
 import RentalCartProvider from "./store/RentalCartProvider";
 import bnbData from "./data/bnbs.json";
 
@@ -14,13 +12,23 @@ const theme = createTheme({
     primary: {
       main: "#7C4555",
     },
+    custom: {
+      background: "#fff",
+    },
   },
 });
 
 function App() {
   const [displayCartFlag, setDisplayCartFlag] = useState(false);
 
-  const displayCart = () => {
+  const imageAltDescriptions = {
+    "Centrally-located Manhattan studio": "Manhattan skyline at night.",
+    "Denver apartment outside Union Station": "Main entrance of Union Station",
+    "Quaint 3-bedroom home in Gamla stan":
+      "White residential building with blue exterior window shutters",
+  };
+
+  const toggleDisplay = () => {
     setDisplayCartFlag((prevState) => !prevState);
   };
 
@@ -38,17 +46,19 @@ function App() {
 
   // done - Offers a "Shopping Cart" functionality where you can add a vacation rental to a shopping cart. This shopping cart should...
   // done - Be displayed next to the vacation rentals
-  // Allow the user to remove a vacation rental from the cart if they change their mind
-  // Display the total payment due based on the vacation rentals in the cart
-  // In order to facilitate the "Shopping Cart" functionality, each vacation rental should have a button that allows the user to add a vacation rental to the shopping cart.
+  // done - Allow the user to remove a vacation rental from the cart if they change their mind
+  // done - Display the total payment due based on the vacation rentals in the cart
+  // done - In order to facilitate the "Shopping Cart" functionality, each vacation rental should have a button that allows the user to add a vacation rental to the shopping cart.
   const bnbRentals = bnbData.map((rental, index) => {
+    const altText = !rental.alt ? imageAltDescriptions[rental.title] : rental.alt;
+
     return (
-      <Grid key={index} item xs={12} sm={6} md={4} lg={4} xl={3}>
+      <Grid item key={index} xs={12} sm={6} md={4} lg={4} xl={3}>
         <BnbRental
           id={index}
-          imageAlt="null"
           houseType={rental.houseType}
           image={rental.image}
+          imageAlt={altText}
           location={rental.location}
           paymentInfo={rental.payment}
           stars={rental.rating.stars}
@@ -61,11 +71,20 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <RentalCartProvider>
-        <NavHeader displayCart={displayCart} />
-        {displayCartFlag && <BnbShoppingCart displayCart={displayCart} />}
-        <GridContainer spacing={2} columns={12}>
-          {bnbRentals}
-        </GridContainer>
+        <NavHeader displayCart={toggleDisplay} />
+        {displayCartFlag && <BnbShoppingCart displayCart={toggleDisplay} />}
+        <Paper
+          sx={{
+            padding: 2,
+            flexGrow: 0,
+            elevation: 0,
+            minWidth: "345px",
+          }}
+        >
+          <Grid container spacing={2} columns={12}>
+            {bnbRentals}
+          </Grid>
+        </Paper>
       </RentalCartProvider>
     </ThemeProvider>
   );
