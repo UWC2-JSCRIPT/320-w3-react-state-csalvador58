@@ -7,13 +7,14 @@ import PropTypes from "prop-types";
 function BnbShoppingCart({ displayCart }) {
   const rentalCart = useContext(RentalCartContext);
 
-  const cartItems = rentalCart.rentals.map((rental) => {
+  const cartItems = rentalCart.rentals.map((rental, index) => {
     return (
       <ListItems
-        key={rental.id}
+        key={index}
         title={rental.title}
         fee={rental.fee}
         city={rental.city}
+        length={rental.numberOfDays}
       />
     );
   });
@@ -36,7 +37,7 @@ function BnbShoppingCart({ displayCart }) {
             variant="h6"
             component="div"
           >
-            {rentalCart.rentals.length ? `Items you added to the cart!`: `Cart is empty.`}
+            {rentalCart.rentals.length ? `Items you added to the cart!`: `Your cart is empty. Are you sure you don't need a place to stay?`}
           </Typography>
           <List>{cartItems}</List>
           <Typography

@@ -9,15 +9,15 @@ function AddToCart({ id, title, fee, city }) {
 
   const onClickHandler = () => {
     rentalCart.addRental({
-      id: id,
       title: title,
       fee: fee,
       city: city,
+      numberOfDays: 1,
     });
   };
 
   return (
-    <IconButton onClick={() => onClickHandler()}>
+    <IconButton onClick={onClickHandler}>
       <Grid
         container
         direction={"column"}
