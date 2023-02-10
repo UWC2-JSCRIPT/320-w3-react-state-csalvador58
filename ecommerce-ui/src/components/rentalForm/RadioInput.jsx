@@ -12,7 +12,7 @@ export default function RadioInput({ inputChange, superhost }) {
       <RadioGroup
         row
         aria-labelledby="is-superhost"
-        name="is-superhost"
+        name="isSuperhost"
         value={superhost}
         onChange={inputChange}
       >
@@ -20,9 +20,9 @@ export default function RadioInput({ inputChange, superhost }) {
           key="yes"
           value="yes"
           control={<Radio />}
-          label="yes"
+          label="Yes"
         />
-        <FormControlLabel key="no" value="no" control={<Radio />} label="no" />
+        <FormControlLabel key="no" value="no" control={<Radio />} label="No" />
       </RadioGroup>
     </FormControl>
   );

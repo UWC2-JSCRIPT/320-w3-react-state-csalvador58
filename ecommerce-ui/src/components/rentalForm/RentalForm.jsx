@@ -17,31 +17,23 @@ const defaultValues = {
   title: "",
   houseType: "",
   image: "",
-  location: {
-    city: "",
-    country: "",
-  },
-  payment: {
-    cost: 0,
-    description: "",
-  },
-  host: {
-    name: "",
-    isSuperhost: false,
-  },
-  rating: {
-    stars: "",
-    reviews: "",
-  },
+  city: "",
+  country: "",
+  cost: 0,
+  description: "",
+  name: "",
+  isSuperhost: false,
 };
 
 export default function RentalForm({ displayForm }) {
   const [formValues, setFormValues] = useState(defaultValues);
 
   const inputChangeHandler = (event) => {
-    console.log(event);
-    const { input, value } = event.target;
-    setFormValues({ ...formValues, [input]: value });
+    console.log(event.target);
+    const { name, value } = event.target;
+    console.log(name)
+    console.log(value)
+    setFormValues({ ...formValues, [name]: value });
   };
 
   const submitHandler = (event) => {
@@ -57,18 +49,17 @@ export default function RentalForm({ displayForm }) {
           variant="h6"
           component="div"
         >
-          Enter Your Rental
+          Have a place to rent out? Enter you rental information below.
         </Typography>
         <Grid container spacing={2} direction="column" columns={12}>
           <Grid item xs={12}>
             <TextField
               fullWidth
               id="title"
-              name="rental-title"
+              name="title"
               label="Rental Title"
               type="text"
               value={formValues.title}
-              defaultValue=""
               helperText="i.e. Ocean-side cottage with beach access."
               onChange={inputChangeHandler}
             />
@@ -77,12 +68,11 @@ export default function RentalForm({ displayForm }) {
             <Grid item xs={12} sm={6} md={4} lg={4}>
               <TextField
                 fullWidth
-                id="host"
-                name="host"
+                id="name"
+                name="name"
                 label="Host name"
                 text="text"
-                value={formValues.host.name}
-                defaultValue=""
+                value={formValues.name}
                 helperText=""
                 onChange={inputChangeHandler}
               />
@@ -90,18 +80,17 @@ export default function RentalForm({ displayForm }) {
             <Grid item xs={12} sm={6} md={4} lg={4}>
               <RadioInput
                 inputChange={inputChangeHandler}
-                superhost={formValues.host.isSuperhost}
+                superhost={formValues.isSuperhost}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={4}>
               <TextField
                 fullWidth
-                id="housetype"
-                name="house-type"
+                id="houseType"
+                name="houseType"
                 label="House Type"
                 type="text"
                 value={formValues.houseType}
-                defaultValue=""
                 helperText="i.e. House, Condo, Bedroom, etc."
                 onChange={inputChangeHandler}
               />
@@ -116,7 +105,6 @@ export default function RentalForm({ displayForm }) {
               label="Image"
               type="text"
               value={formValues.image}
-              defaultValue=""
               helperText="i.e. www.imagehost/MyImage.jpeg"
               onChange={inputChangeHandler}
             />
@@ -129,8 +117,7 @@ export default function RentalForm({ displayForm }) {
                 name="city"
                 label="City"
                 type="text"
-                value={formValues.location.city}
-                defaultValue=""
+                value={formValues.city}
                 helperText=""
                 onChange={inputChangeHandler}
               />
@@ -142,8 +129,7 @@ export default function RentalForm({ displayForm }) {
                 name="country"
                 label="Country"
                 type="text"
-                value={formValues.location.country}
-                defaultValue=""
+                value={formValues.country}
                 helperText=""
                 onChange={inputChangeHandler}
               />
@@ -151,7 +137,7 @@ export default function RentalForm({ displayForm }) {
           </Grid>
 
           <Grid item>
-            <FormControl sx={{width: '50vw'}}>
+            <FormControl sx={{ width: "50vw" }}>
               <InputLabel htmlFor="rental-cost">
                 Total rental fees per day in USD
               </InputLabel>
@@ -159,7 +145,7 @@ export default function RentalForm({ displayForm }) {
                 id="cost"
                 name="cost"
                 type="number"
-                value={formValues.payment.cost}
+                value={formValues.cost}
                 startAdornment={
                   <InputAdornment position="start">$</InputAdornment>
                 }
@@ -170,15 +156,15 @@ export default function RentalForm({ displayForm }) {
           </Grid>
           <Grid item>
             <SelectInput
-              freeCancel={formValues.payment.description}
+              freeCancel={formValues.description}
               inputChange={inputChangeHandler}
             />
           </Grid>
         </Grid>
-        <Button variant="contained" type="submit" sx={{margin: '2rem'}}>
-          Submit
+        <Button color="customBtn" variant="contained" type="submit" sx={{ margin: "2rem" }}>
+          Submit Rental
         </Button>
-        <Button color="customBtn" variant="contained" onClick={displayForm}>
+        <Button variant="contained" onClick={displayForm}>
           Close Form
         </Button>
       </form>

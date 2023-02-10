@@ -5,7 +5,7 @@ export default function SelectInput({ freeCancel, inputChange }) {
   return (
     <FormControl sx={{width: '50vw'}}>
       <FormLabel>Offer free cancellation?</FormLabel>
-      <Select name="freeCancellation" value={freeCancel} onChange={inputChange}>
+      <Select name="description" value={freeCancel} onChange={inputChange}>
         <MenuItem key="yes" value="free cancellation">
           Yes
         </MenuItem>
