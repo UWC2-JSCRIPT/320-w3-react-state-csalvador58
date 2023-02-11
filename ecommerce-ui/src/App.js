@@ -18,8 +18,8 @@ const theme = createTheme({
       alt: "#D6EAF8",
     },
     customBtn: {
-      main: "#5499C7"
-    }
+      main: "#5499C7",
+    },
   },
 });
 
@@ -47,6 +47,8 @@ function App() {
     }
     setDisplayFormFlag((prevState) => !prevState);
   };
+
+  const userAddedRentalHandler = (rentalInfo) => {};
 
   // App requirements
   // done - At minimum, your UI should display each Bnb's:
@@ -94,7 +96,12 @@ function App() {
           displayForm={toggleFormDisplay}
         />
         {displayCartFlag && <BnbShoppingCart displayCart={toggleCartDisplay} />}
-        {displayFormFlag && <RentalForm displayForm={toggleFormDisplay} />}
+        {displayFormFlag && (
+          <RentalForm
+            displayForm={toggleFormDisplay}
+            userAddedRental={userAddedRentalHandler}
+          />
+        )}
         <Paper
           sx={{
             padding: 2,

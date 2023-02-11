@@ -24,6 +24,7 @@ const defaultErrorState = {
   title: [false, "Please enter a title"],
   houseType: [false, "Please enter a rental type"],
   image: [false, "Please enter a valid image address"],
+  imageAlt: [false, "Please enter a valid image description"],
   city: [false, "Please enter a city"],
   country: [false, "Please enter a country"],
   cost: [false, "Please enter a valid amount"],
@@ -57,6 +58,7 @@ export default function RentalForm({ displayForm }) {
       title: false,
       houseType: false,
       image: false,
+      imageAlt: false,
       city: false,
       country: false,
       cost: false,
@@ -67,6 +69,7 @@ export default function RentalForm({ displayForm }) {
     errorCheck.title = emptyInput.test(formValues.title) ? true : false;
     errorCheck.houseType = emptyInput.test(formValues.houseType) ? true : false;
     errorCheck.image = emptyInput.test(formValues.image) ? true : false;
+    errorCheck.imageAlt = emptyInput.test(formValues.image) ? true : false;
     errorCheck.city = emptyInput.test(formValues.city) ? true : false;
     errorCheck.country = emptyInput.test(formValues.country) ? true : false;
     errorCheck.cost = isNumber.test(formValues.cost) ? true : false;
@@ -78,12 +81,16 @@ export default function RentalForm({ displayForm }) {
         title: [errorCheck.title, errorFlags.title[1]],
         houseType: [errorCheck.houseType, errorFlags.houseType[1]],
         image: [errorCheck.image, errorFlags.image[1]],
+        imageAlt: [errorCheck.imageAlt, errorFlags.imageAlt[1]],
         city: [errorCheck.city, errorFlags.city[1]],
         country: [errorCheck.country, errorFlags.country],
         cost: [errorCheck.cost, errorFlags.cost[1]],
         name: [errorCheck.name, errorCheck.name[1]],
       });
+      return
     }
+
+
   };
 
   return (
@@ -114,6 +121,7 @@ export default function RentalForm({ displayForm }) {
 
           <FormInputLine03
             errorFlagsImage={errorFlags.image}
+            errorFlagsImageAlt={errorFlags.imageAlt}
             value={formValues.image}
             onChange={inputChangeHandler}
           />
