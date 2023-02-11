@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-import {
-  Button,
-  FormControl,
-  Grid,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import DisplayCard from "../../UI/DisplayCard";
-import RadioInput from "./RadioInput";
 import SelectInput from "./SelectInput";
+import FormInputLine01 from "./FormInputLine01";
+import FormInputLine02 from "./FormInputLine02";
+import FormInputLine03 from "./FormInputLine03";
+import FormInputLine04 from "./FormInputLine04";
+import FormInputLine05 from "./FormInputLine05";
+import FormInputLine06 from "./FormInputLine06";
 
 const defaultValues = {
   title: "",
@@ -26,58 +22,69 @@ const defaultValues = {
 };
 
 const defaultErrorState = {
-  title: [false, 'Please enter a title'],
-    houseType: [false, 'Please enter a rental type'],
-    image: [false, 'Please enter a valid image address'],
-    city: [false, 'Please enter a city'],
-    country: [false, 'Please enter a country'],
-    cost: [false, 'Please enter a valid amount'],
-    description: false,
-    name: [false, 'Please enter a host name'],
-    isSuperhost: false,
-}
+  title: [false, "Please enter a title"],
+  houseType: [false, "Please enter a rental type"],
+  image: [false, "Please enter a valid image address"],
+  city: [false, "Please enter a city"],
+  country: [false, "Please enter a country"],
+  cost: [false, "Please enter a valid amount"],
+  description: false,
+  name: [false, "Please enter a host name"],
+  isSuperhost: false,
+};
 
 export default function RentalForm({ displayForm }) {
   const [formValues, setFormValues] = useState(defaultValues);
-  const [errorOn, setErrorOn] = useState(defaultErrorState)
+  const [errorFlags, setErrorFlags] = useState(defaultErrorState);
 
   const inputChangeHandler = (event) => {
-    console.log(event.target);
     const { name, value } = event.target;
-    console.log(name);
-    console.log(value);
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues((currentState) => {
+      const updateState = { ...currentState };
+      updateState[name] = value;
+      return updateState;
+    });
   };
-
-  // const errorOn = {
-  //   title: [false, 'Please enter a title'],
-  //   houseType: [false, 'Please enter a rental type'],
-  //   image: [false, 'Please enter a valid image address'],
-  //   city: [false, 'Please enter a city'],
-  //   country: [false, 'Please enter a country'],
-  //   cost: [false, 'Please enter a valid amount'],
-  //   description: false,
-  //   name: [false, 'Please enter a host name'],
-  //   isSuperhost: false,
-  // };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(formValues);
 
+    // For regex input tests
     const emptyInput = /^\s*$/;
     const isNumber = /^[0-9]+$/;
 
-    
+    // Init values
+    const errorCheck = {
+      title: false,
+      houseType: false,
+      image: false,
+      city: false,
+      country: false,
+      cost: false,
+      name: false,
+    };
 
-    emptyInput.test(formValues.title) ? setErrorOn() : false;
-    errorOn.houseType[0] = emptyInput.test(formValues.houseType) ? true : false;
-    errorOn.image[0] = emptyInput.test(formValues.image) ? true : false;
-    errorOn.city[0] = emptyInput.test(formValues.city) ? true : false;
-    errorOn.country[0] = emptyInput.test(formValues.country) ? true : false;
-    errorOn.name[0] = emptyInput.test(formValues.name) ? true : false;
-    errorOn.cost[0] = isNumber.test(formValues.cost) ? true : false;
-    
+    // Complete error checks on form inputs
+    errorCheck.title = emptyInput.test(formValues.title) ? true : false;
+    errorCheck.houseType = emptyInput.test(formValues.houseType) ? true : false;
+    errorCheck.image = emptyInput.test(formValues.image) ? true : false;
+    errorCheck.city = emptyInput.test(formValues.city) ? true : false;
+    errorCheck.country = emptyInput.test(formValues.country) ? true : false;
+    errorCheck.cost = isNumber.test(formValues.cost) ? true : false;
+    errorCheck.name = emptyInput.test(formValues.name) ? true : false;
+
+    if (Object.values(errorCheck).includes(true)) {
+      setErrorFlags({
+        ...errorFlags,
+        title: [errorCheck.title, errorFlags.title[1]],
+        houseType: [errorCheck.houseType, errorFlags.houseType[1]],
+        image: [errorCheck.image, errorFlags.image[1]],
+        city: [errorCheck.city, errorFlags.city[1]],
+        country: [errorCheck.country, errorFlags.country],
+        cost: [errorCheck.cost, errorFlags.cost[1]],
+        name: [errorCheck.name, errorCheck.name[1]],
+      });
+    }
   };
 
   return (
@@ -91,122 +98,43 @@ export default function RentalForm({ displayForm }) {
           Have a place to rent out? Enter your rental information below.
         </Typography>
         <Grid container spacing={2} direction="column" columns={12}>
-          <Grid item xs={12}>
-            <TextField
-              error={errorOn.title[0]}
-              fullWidth
-              id="title"
-              name="title"
-              label="Rental Title"
-              type="text"
-              value={formValues.title}
-              helperText={errorOn.title[0] ? errorOn.title[1] : "i.e. Ocean-side cottage with beach access."}
-              onChange={inputChangeHandler}
-            />
-          </Grid>
-          <Grid item container columns={12} spacing={3}>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
-              <TextField
-                error={errorOn.name[0]}
-                fullWidth
-                id="name"
-                name="name"
-                label="Host name"
-                text="text"
-                value={formValues.name}
-                helperText={errorOn.name[0] ? errorOn.name[1] : ""}
-                onChange={inputChangeHandler}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
-              <RadioInput
-                inputChange={inputChangeHandler}
-                superhost={formValues.isSuperhost}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
-              <TextField
-                error={errorOn.houseType[0]}
-                fullWidth
-                id="houseType"
-                name="houseType"
-                label="House Type"
-                type="text"
-                value={formValues.houseType}
-                helperText={errorOn.houseType[0] ? errorOn.houseType[1] : "i.e. House, Condo, Bedroom, etc."}
-                onChange={inputChangeHandler}
-              />
-            </Grid>
-          </Grid>
+          <FormInputLine01
+            errorFlagsTitle={errorFlags.title}
+            value={formValues.title}
+            onChange={inputChangeHandler}
+          />
 
-          <Grid item>
-            <TextField
-              error={errorOn.image[0]}
-              fullWidth
-              id="image"
-              name="image"
-              label="Image"
-              type="text"
-              value={formValues.image}
-              helperText={errorOn.image[0] ? errorOn.image[1] : "i.e. www.imagehost/MyImage.jpeg"}
-              onChange={inputChangeHandler}
-            />
-          </Grid>
-          <Grid item container xs={12} spacing={3}>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
-              <TextField
-                error={errorOn.city[0]}
-                fullWidth
-                id="city"
-                name="city"
-                label="City"
-                type="text"
-                value={formValues.city}
-                helperText={errorOn.city[0] ? errorOn.city[1] : ""}
-                onChange={inputChangeHandler}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={4}>
-              <TextField
-                error={errorOn.country[0]}
-                fullWidth
-                id="country"
-                name="country"
-                label="Country"
-                type="text"
-                value={formValues.country}
-                helperText={errorOn.country[0] ? errorOn.country[1] : ""}
-                onChange={inputChangeHandler}
-              />
-            </Grid>
-          </Grid>
+          <FormInputLine02
+            errorFlagsName={errorFlags.name}
+            errorFlagsType={errorFlags.houseType}
+            nameValue={formValues.name}
+            onChange={inputChangeHandler}
+            superhost={formValues.isSuperhost}
+            type={formValues.houseType}
+          />
 
-          <Grid item>
-            <FormControl sx={{ width: { xs: "100%", sm: "48%" } }}>
-              <InputLabel htmlFor="rental-cost">
-                Total rental fees per day in USD
-              </InputLabel>
-              <OutlinedInput
-                error={errorOn.cost[0]}
-                id="cost"
-                name="cost"
-                type="number"
-                value={formValues.cost}
-                startAdornment={
-                  <InputAdornment position="start">$</InputAdornment>
-                }
-                label="Total rental fees per day in USD"
-                // helperText={errorOn.cost[0] ? errorOn.cost[1] : ""}
-                onChange={inputChangeHandler}
-              />
-            </FormControl>
-          </Grid>
-          <Grid item>
-            <SelectInput
-              freeCancel={formValues.description}
-              inputChange={inputChangeHandler}
-            />
-          </Grid>
+          <FormInputLine03
+            errorFlagsImage={errorFlags.image}
+            value={formValues.image}
+            onChange={inputChangeHandler}
+          />
+          <FormInputLine04
+            errorFlagsCity={errorFlags.city}
+            errorFlagsCountry={errorFlags.country}
+            cityValue={formValues.city}
+            countryValue={formValues.country}
+            onChange={inputChangeHandler}
+          />
+
+          <FormInputLine05
+            errorFlagsCost={errorFlags.cost}
+            value={formValues.cost}
+            onChange={inputChangeHandler}
+          />
+          <FormInputLine06
+            description={formValues.description}
+            onChange={inputChangeHandler}
+          />
         </Grid>
         <Button
           color="customBtn"

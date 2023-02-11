@@ -1,14 +1,22 @@
 import React from "react";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
 export default function RadioInput({ inputChange, superhost }) {
   return (
     <FormControl>
-      <FormLabel id="isSuperhost">Will host be a Superhost?</FormLabel>
+      <FormLabel id="isSuperhost">
+        Will host be a Superhost?{" "}
+        <Box component="span" fontStyle="italic">
+          (Optional)
+        </Box>
+      </FormLabel>
       <RadioGroup
         row
         aria-labelledby="is-superhost"
