@@ -25,8 +25,21 @@ const defaultValues = {
   isSuperhost: false,
 };
 
+const defaultErrorState = {
+  title: [false, 'Please enter a title'],
+    houseType: [false, 'Please enter a rental type'],
+    image: [false, 'Please enter a valid image address'],
+    city: [false, 'Please enter a city'],
+    country: [false, 'Please enter a country'],
+    cost: [false, 'Please enter a valid amount'],
+    description: false,
+    name: [false, 'Please enter a host name'],
+    isSuperhost: false,
+}
+
 export default function RentalForm({ displayForm }) {
   const [formValues, setFormValues] = useState(defaultValues);
+  const [errorOn, setErrorOn] = useState(defaultErrorState)
 
   const inputChangeHandler = (event) => {
     console.log(event.target);
@@ -36,9 +49,35 @@ export default function RentalForm({ displayForm }) {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  // const errorOn = {
+  //   title: [false, 'Please enter a title'],
+  //   houseType: [false, 'Please enter a rental type'],
+  //   image: [false, 'Please enter a valid image address'],
+  //   city: [false, 'Please enter a city'],
+  //   country: [false, 'Please enter a country'],
+  //   cost: [false, 'Please enter a valid amount'],
+  //   description: false,
+  //   name: [false, 'Please enter a host name'],
+  //   isSuperhost: false,
+  // };
+
   const submitHandler = (event) => {
     event.preventDefault();
     console.log(formValues);
+
+    const emptyInput = /^\s*$/;
+    const isNumber = /^[0-9]+$/;
+
+    
+
+    emptyInput.test(formValues.title) ? setErrorOn() : false;
+    errorOn.houseType[0] = emptyInput.test(formValues.houseType) ? true : false;
+    errorOn.image[0] = emptyInput.test(formValues.image) ? true : false;
+    errorOn.city[0] = emptyInput.test(formValues.city) ? true : false;
+    errorOn.country[0] = emptyInput.test(formValues.country) ? true : false;
+    errorOn.name[0] = emptyInput.test(formValues.name) ? true : false;
+    errorOn.cost[0] = isNumber.test(formValues.cost) ? true : false;
+    
   };
 
   return (
@@ -54,26 +93,28 @@ export default function RentalForm({ displayForm }) {
         <Grid container spacing={2} direction="column" columns={12}>
           <Grid item xs={12}>
             <TextField
+              error={errorOn.title[0]}
               fullWidth
               id="title"
               name="title"
               label="Rental Title"
               type="text"
               value={formValues.title}
-              helperText="i.e. Ocean-side cottage with beach access."
+              helperText={errorOn.title[0] ? errorOn.title[1] : "i.e. Ocean-side cottage with beach access."}
               onChange={inputChangeHandler}
             />
           </Grid>
           <Grid item container columns={12} spacing={3}>
             <Grid item xs={12} sm={6} md={4} lg={4}>
               <TextField
+                error={errorOn.name[0]}
                 fullWidth
                 id="name"
                 name="name"
                 label="Host name"
                 text="text"
                 value={formValues.name}
-                helperText=""
+                helperText={errorOn.name[0] ? errorOn.name[1] : ""}
                 onChange={inputChangeHandler}
               />
             </Grid>
@@ -85,13 +126,14 @@ export default function RentalForm({ displayForm }) {
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={4}>
               <TextField
+                error={errorOn.houseType[0]}
                 fullWidth
                 id="houseType"
                 name="houseType"
                 label="House Type"
                 type="text"
                 value={formValues.houseType}
-                helperText="i.e. House, Condo, Bedroom, etc."
+                helperText={errorOn.houseType[0] ? errorOn.houseType[1] : "i.e. House, Condo, Bedroom, etc."}
                 onChange={inputChangeHandler}
               />
             </Grid>
@@ -99,38 +141,41 @@ export default function RentalForm({ displayForm }) {
 
           <Grid item>
             <TextField
+              error={errorOn.image[0]}
               fullWidth
               id="image"
               name="image"
               label="Image"
               type="text"
               value={formValues.image}
-              helperText="i.e. www.imagehost/MyImage.jpeg"
+              helperText={errorOn.image[0] ? errorOn.image[1] : "i.e. www.imagehost/MyImage.jpeg"}
               onChange={inputChangeHandler}
             />
           </Grid>
           <Grid item container xs={12} spacing={3}>
             <Grid item xs={12} sm={6} md={4} lg={4}>
               <TextField
+                error={errorOn.city[0]}
                 fullWidth
                 id="city"
                 name="city"
                 label="City"
                 type="text"
                 value={formValues.city}
-                helperText=""
+                helperText={errorOn.city[0] ? errorOn.city[1] : ""}
                 onChange={inputChangeHandler}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={4}>
               <TextField
+                error={errorOn.country[0]}
                 fullWidth
                 id="country"
                 name="country"
                 label="Country"
                 type="text"
                 value={formValues.country}
-                helperText=""
+                helperText={errorOn.country[0] ? errorOn.country[1] : ""}
                 onChange={inputChangeHandler}
               />
             </Grid>
@@ -142,6 +187,7 @@ export default function RentalForm({ displayForm }) {
                 Total rental fees per day in USD
               </InputLabel>
               <OutlinedInput
+                error={errorOn.cost[0]}
                 id="cost"
                 name="cost"
                 type="number"
@@ -150,6 +196,7 @@ export default function RentalForm({ displayForm }) {
                   <InputAdornment position="start">$</InputAdornment>
                 }
                 label="Total rental fees per day in USD"
+                // helperText={errorOn.cost[0] ? errorOn.cost[1] : ""}
                 onChange={inputChangeHandler}
               />
             </FormControl>
