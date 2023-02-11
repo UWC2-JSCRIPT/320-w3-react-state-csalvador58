@@ -55,6 +55,6 @@ FormInputLine02.propTypes = {
   errorFlagsType: PropTypes.array.isRequired,
   nameValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  superhost: PropTypes.bool.isRequired,
+  superhost: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   type: PropTypes.string.isRequired,
 };

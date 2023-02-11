@@ -11,12 +11,7 @@ import {
 export default function RadioInput({ inputChange, superhost }) {
   return (
     <FormControl>
-      <FormLabel id="isSuperhost">
-        Will host be a Superhost?{" "}
-        <Box component="span" fontStyle="italic">
-          (Optional)
-        </Box>
-      </FormLabel>
+      <FormLabel id="isSuperhost">Will host be a Superhost?</FormLabel>
       <RadioGroup
         row
         aria-labelledby="is-superhost"
@@ -26,11 +21,16 @@ export default function RadioInput({ inputChange, superhost }) {
       >
         <FormControlLabel
           key="yes"
-          value="yes"
+          value="true"
           control={<Radio />}
           label="Yes"
         />
-        <FormControlLabel key="no" value="no" control={<Radio />} label="No" />
+        <FormControlLabel
+          key="no"
+          value="false"
+          control={<Radio />}
+          label="No"
+        />
       </RadioGroup>
     </FormControl>
   );
