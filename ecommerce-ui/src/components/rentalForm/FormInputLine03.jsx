@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 export default function FormInputLine03({
   errorFlagsImage,
   errorFlagsImageAlt,
-  value,
+  imageValue,
+  imageAltValue,
   onChange,
 }) {
   return (
@@ -18,7 +19,7 @@ export default function FormInputLine03({
           name="image"
           label="Image"
           type="text"
-          value={value}
+          value={imageValue}
           helperText={
             errorFlagsImage[0]
               ? errorFlagsImage[1]
@@ -35,7 +36,7 @@ export default function FormInputLine03({
           name="imageAlt"
           label="Description of image"
           type="text"
-          value={value}
+          value={imageAltValue}
           helperText={
             errorFlagsImageAlt[0]
               ? errorFlagsImageAlt[1]
@@ -51,6 +52,7 @@ export default function FormInputLine03({
 FormInputLine03.propTypes = {
   errorFlagsImage: PropTypes.array.isRequired,
   errorFlagsImageAlt: PropTypes.array.isRequired,
-  value: PropTypes.string.isRequired,
+  imageValue: PropTypes.string.isRequired,
+  imageAltValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };

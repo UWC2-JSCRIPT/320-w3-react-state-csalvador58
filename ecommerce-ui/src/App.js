@@ -24,6 +24,7 @@ const theme = createTheme({
 });
 
 function App() {
+  const [availableRentals, setAvailableRentals] = useState(bnbData);
   const [displayCartFlag, setDisplayCartFlag] = useState(false);
   const [displayFormFlag, setDisplayFormFlag] = useState(false);
 
@@ -48,7 +49,34 @@ function App() {
     setDisplayFormFlag((prevState) => !prevState);
   };
 
-  const userAddedRentalHandler = (rentalInfo) => {};
+  const userAddedRentalHandler = (rentalInfo) => {
+    setAvailableRentals((currentState) => {
+      const updatedState = [
+        ...currentState,
+        {
+          title: rentalInfo.title,
+          houseType: rentalInfo.houseType,
+          image: rentalInfo.image,
+          imageAlt: rentalInfo.imageAlt,
+          location: { city: rentalInfo.city, country: rentalInfo.country },
+          payment: {
+            cost: rentalInfo.cost,
+            description: rentalInfo.description,
+          },
+          host: {
+            name: rentalInfo.name,
+            isSuperhost: rentalInfo.isSuperhost,
+          },
+          rating: {
+            stars: 5,
+            reviews: 0,
+          },
+        },
+      ];
+
+      return updatedState;
+    });
+  };
 
   // App requirements
   // done - At minimum, your UI should display each Bnb's:
@@ -67,7 +95,7 @@ function App() {
   // done - Allow the user to remove a vacation rental from the cart if they change their mind
   // done - Display the total payment due based on the vacation rentals in the cart
   // done - In order to facilitate the "Shopping Cart" functionality, each vacation rental should have a button that allows the user to add a vacation rental to the shopping cart.
-  const bnbRentals = bnbData.map((rental, index) => {
+  const bnbRentals = availableRentals.map((rental, index) => {
     const altText = !rental.alt
       ? imageAltDescriptions[rental.title]
       : rental.alt;

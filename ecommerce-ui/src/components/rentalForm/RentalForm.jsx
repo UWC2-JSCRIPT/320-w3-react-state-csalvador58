@@ -7,11 +7,13 @@ import FormInputLine03 from "./FormInputLine03";
 import FormInputLine04 from "./FormInputLine04";
 import FormInputLine05 from "./FormInputLine05";
 import FormInputLine06 from "./FormInputLine06";
+import PropTypes from "prop-types";
 
 const defaultValues = {
   title: "",
   houseType: "",
   image: "",
+  imageAlt: "",
   city: "",
   country: "",
   cost: 0,
@@ -33,7 +35,7 @@ const defaultErrorState = {
   isSuperhost: false,
 };
 
-export default function RentalForm({ displayForm }) {
+export default function RentalForm({ displayForm, userAddedRental }) {
   const [formValues, setFormValues] = useState(defaultValues);
   const [errorFlags, setErrorFlags] = useState(defaultErrorState);
 
@@ -41,7 +43,9 @@ export default function RentalForm({ displayForm }) {
     const { name, value } = event.target;
     setFormValues((currentState) => {
       const updateState = { ...currentState };
-      updateState[name] = value;
+      if(name === 'cost') {
+        updateState[name] = +value;
+      } else updateState[name] = value;
       return updateState;
     });
   };
@@ -72,10 +76,11 @@ export default function RentalForm({ displayForm }) {
     errorCheck.imageAlt = emptyInput.test(formValues.image) ? true : false;
     errorCheck.city = emptyInput.test(formValues.city) ? true : false;
     errorCheck.country = emptyInput.test(formValues.country) ? true : false;
-    errorCheck.cost = isNumber.test(formValues.cost) ? true : false;
+    errorCheck.cost = isNumber.test(+formValues.cost) ? true : false;
     errorCheck.name = emptyInput.test(formValues.name) ? true : false;
 
     if (Object.values(errorCheck).includes(true)) {
+      console.log('Error in form detected')
       setErrorFlags({
         ...errorFlags,
         title: [errorCheck.title, errorFlags.title[1]],
@@ -87,10 +92,9 @@ export default function RentalForm({ displayForm }) {
         cost: [errorCheck.cost, errorFlags.cost[1]],
         name: [errorCheck.name, errorCheck.name[1]],
       });
-      return
+      return;
     }
-
-
+    userAddedRental(formValues);
   };
 
   return (
@@ -122,7 +126,8 @@ export default function RentalForm({ displayForm }) {
           <FormInputLine03
             errorFlagsImage={errorFlags.image}
             errorFlagsImageAlt={errorFlags.imageAlt}
-            value={formValues.image}
+            imageValue={formValues.image}
+            imageAltValue={formValues.imageAlt}
             onChange={inputChangeHandler}
           />
           <FormInputLine04
@@ -158,3 +163,8 @@ export default function RentalForm({ displayForm }) {
     </DisplayCard>
   );
 }
+
+RentalForm.propTypes = {
+  displayForm: PropTypes.func.isRequired,
+  userAddedRental: PropTypes.func.isRequired,
+};
