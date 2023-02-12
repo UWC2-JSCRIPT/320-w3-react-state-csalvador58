@@ -22,19 +22,17 @@ function NavHeader({ displayCart, displayForm }) {
     <Box sx={{ flexGrow: 1, marginBottom: 3, minWidth: "360px" }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2, display: { xs: "none", sm: "flex" } }}
-          >
-            <CottageIcon />
-          </IconButton>
+          <CottageIcon
+            aria-hidden="false"
+            aria-label="Cottage Icon"
+            role="img"
+            title="Cottage Icon"
+          />
           <Typography
+            paddingLeft={2}
             variant="h6"
             noWrap
-            component="div"
+            component="h1"
             sx={{ display: { xs: "block" } }}
           >
             BnB Rentals
@@ -51,7 +49,12 @@ function NavHeader({ displayCart, displayForm }) {
                 color="inherit"
                 onClick={displayForm}
               >
-                <AddBusinessIcon />
+                <AddBusinessIcon
+                  aria-hidden="false"
+                  aria-label="Add Business Icon"
+                  role="img"
+                  title="Add Business Icon"
+                />
               </IconButton>
             </Tooltip>
           </Box>
@@ -64,7 +67,12 @@ function NavHeader({ displayCart, displayForm }) {
                 onClick={displayCart}
               >
                 <Badge badgeContent={numberOfRentalsInCart} color="error">
-                  <ShoppingCartIcon />
+                  <ShoppingCartIcon
+                    aria-hidden="false"
+                    aria-label="Shopping Cart Icon"
+                    role="img"
+                    title="Shopping Cart Icon"
+                  />
                 </Badge>
               </IconButton>
             </Tooltip>

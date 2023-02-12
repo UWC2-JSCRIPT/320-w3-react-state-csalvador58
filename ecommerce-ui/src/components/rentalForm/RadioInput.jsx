@@ -1,17 +1,17 @@
 import React from "react";
 import {
-  Box,
   FormControl,
   FormControlLabel,
   FormLabel,
   Radio,
   RadioGroup,
 } from "@mui/material";
+import PropTypes from "prop-types";
 
 export default function RadioInput({ inputChange, superhost }) {
   return (
     <FormControl>
-      <FormLabel id="isSuperhost">Will host be a Superhost?</FormLabel>
+      <FormLabel id="isSuperhost">Is host a Superhost?</FormLabel>
       <RadioGroup
         row
         aria-labelledby="is-superhost"
@@ -35,3 +35,8 @@ export default function RadioInput({ inputChange, superhost }) {
     </FormControl>
   );
 }
+
+RadioInput.propTypes = {
+  inputChange: PropTypes.func.isRequired,
+  superhost: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+};

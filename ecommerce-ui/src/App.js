@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Grid, Paper } from "@mui/material/";
+import { Box, Grid } from "@mui/material/";
 import BnbRental from "./components/bnbRentalCard/BnbRental";
 import BnbShoppingCart from "./components/BnbShoppingCart";
 import NavHeader from "./UI/NavHeader";
@@ -78,23 +78,6 @@ function App() {
     });
   };
 
-  // App requirements
-  // done - At minimum, your UI should display each Bnb's:
-  // done - Title
-  // done - Image
-  // done - Location
-  // done - Payment information
-
-  // Your UI code should:
-  // done - Utilize at least one component to render each Bnb. An example name for this component could be VacationRental.
-  // done - Use the appropriate loops/conditionals to map and display components.
-  // done - Use propTypes to define props for each component, if any.
-
-  // done - Offers a "Shopping Cart" functionality where you can add a vacation rental to a shopping cart. This shopping cart should...
-  // done - Be displayed next to the vacation rentals
-  // done - Allow the user to remove a vacation rental from the cart if they change their mind
-  // done - Display the total payment due based on the vacation rentals in the cart
-  // done - In order to facilitate the "Shopping Cart" functionality, each vacation rental should have a button that allows the user to add a vacation rental to the shopping cart.
   const bnbRentals = availableRentals.map((rental, index) => {
     const altText = !rental.alt
       ? imageAltDescriptions[rental.title]
@@ -106,7 +89,7 @@ function App() {
           id={index}
           houseType={rental.houseType}
           image={rental.image}
-          imageAlt={altText}
+          imageAlt={altText || rental.imageAlt}
           location={rental.location}
           paymentInfo={rental.payment}
           stars={rental.rating.stars}
@@ -130,18 +113,17 @@ function App() {
             userAddedRental={userAddedRentalHandler}
           />
         )}
-        <Paper
+        <Box
           sx={{
             padding: 2,
             flexGrow: 0,
-            elevation: 0,
             minWidth: "345px",
           }}
         >
           <Grid container spacing={2} columns={12}>
             {bnbRentals}
           </Grid>
-        </Paper>
+        </Box>
       </RentalCartProvider>
     </ThemeProvider>
   );

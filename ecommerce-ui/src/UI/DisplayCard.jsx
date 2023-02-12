@@ -15,5 +15,6 @@ export default function DisplayCard({ children, cardColor }) {
 }
 
 DisplayCard.propTypes = {
+  cardColor: PropTypes.string,
   children: PropTypes.node.isRequired,
 };

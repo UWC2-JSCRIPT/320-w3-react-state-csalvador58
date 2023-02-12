@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
+import DisplayCard from "../UI/DisplayCard";
+import RentalsInCart from "./RentalsInCart";
 import RentalCartContext from "../store/RentalCartContext";
 import { Button, List, Typography } from "@mui/material";
-import RentalsInCart from "./RentalsInCart";
 import PropTypes from "prop-types";
-import DisplayCard from "../UI/DisplayCard";
 
 function BnbShoppingCart({ displayCart }) {
   const rentalCart = useContext(RentalCartContext);

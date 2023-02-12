@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
 import RentalCartContext from "../store/RentalCartContext";
+import { Fade, IconButton, ListItem, ListItemText } from "@mui/material/";
 import DeleteIcon from "@mui/icons-material/Delete";
-import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import PropTypes from "prop-types";
-import { Fade } from "@mui/material";
 
 export default function RentalsInCart({ title, fee, city, length }) {
   const rentalCart = useContext(RentalCartContext);
@@ -25,7 +22,12 @@ export default function RentalsInCart({ title, fee, city, length }) {
         <ListItem
           secondaryAction={
             <IconButton edge="end" aria-label="delete" onClick={onClickHandler}>
-              <DeleteIcon />
+              <DeleteIcon
+                aria-hidden="false"
+                aria-label="Delete Icon"
+                role="img"
+                title="Delete Icon"
+              />
             </IconButton>
           }
         >

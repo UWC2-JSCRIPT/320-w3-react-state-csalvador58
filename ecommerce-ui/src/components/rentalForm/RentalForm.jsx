@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button, Grid, Typography } from "@mui/material";
 import DisplayCard from "../../UI/DisplayCard";
 import FormInputLine01 from "./FormInputLine01";
 import FormInputLine02 from "./FormInputLine02";
@@ -7,16 +6,17 @@ import FormInputLine03 from "./FormInputLine03";
 import FormInputLine04 from "./FormInputLine04";
 import FormInputLine05 from "./FormInputLine05";
 import FormInputLine06 from "./FormInputLine06";
+import { Button, Grid, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 
-const defaultValues = {
+const defaultFormValues = {
   title: "",
   houseType: "",
   image: "",
   imageAlt: "",
   city: "",
   country: "",
-  cost: 0,
+  cost: "",
   description: "",
   name: "",
   isSuperhost: false,
@@ -30,20 +30,21 @@ const defaultErrorState = {
   city: [false, "Please enter a city"],
   country: [false, "Please enter a country"],
   cost: [false, "Please enter a valid amount"],
-  description: false,
   name: [false, "Please enter a host name"],
+  // Optional user inputs
+  description: false,
   isSuperhost: false,
 };
 
 export default function RentalForm({ displayForm, userAddedRental }) {
-  const [formValues, setFormValues] = useState(defaultValues);
+  const [formValues, setFormValues] = useState(defaultFormValues);
   const [errorFlags, setErrorFlags] = useState(defaultErrorState);
 
   const inputChangeHandler = (event) => {
     const { name, value } = event.target;
     setFormValues((currentState) => {
       const updateState = { ...currentState };
-      if(name === 'cost') {
+      if (name === "cost") {
         updateState[name] = +value;
       } else updateState[name] = value;
       return updateState;
@@ -55,7 +56,6 @@ export default function RentalForm({ displayForm, userAddedRental }) {
 
     // For regex input tests
     const emptyInput = /^\s*$/;
-    const isNumber = /^[0-9]+$/;
 
     // Init values
     const errorCheck = {
@@ -73,14 +73,13 @@ export default function RentalForm({ displayForm, userAddedRental }) {
     errorCheck.title = emptyInput.test(formValues.title) ? true : false;
     errorCheck.houseType = emptyInput.test(formValues.houseType) ? true : false;
     errorCheck.image = emptyInput.test(formValues.image) ? true : false;
-    errorCheck.imageAlt = emptyInput.test(formValues.image) ? true : false;
+    errorCheck.imageAlt = emptyInput.test(formValues.imageAlt) ? true : false;
     errorCheck.city = emptyInput.test(formValues.city) ? true : false;
     errorCheck.country = emptyInput.test(formValues.country) ? true : false;
-    errorCheck.cost = isNumber.test(+formValues.cost) ? true : false;
+    errorCheck.cost = emptyInput.test(formValues.cost) ? true : false;
     errorCheck.name = emptyInput.test(formValues.name) ? true : false;
 
     if (Object.values(errorCheck).includes(true)) {
-      console.log('Error in form detected')
       setErrorFlags({
         ...errorFlags,
         title: [errorCheck.title, errorFlags.title[1]],
@@ -88,13 +87,16 @@ export default function RentalForm({ displayForm, userAddedRental }) {
         image: [errorCheck.image, errorFlags.image[1]],
         imageAlt: [errorCheck.imageAlt, errorFlags.imageAlt[1]],
         city: [errorCheck.city, errorFlags.city[1]],
-        country: [errorCheck.country, errorFlags.country],
+        country: [errorCheck.country, errorFlags.country[1]],
         cost: [errorCheck.cost, errorFlags.cost[1]],
         name: [errorCheck.name, errorCheck.name[1]],
       });
+      // Form will not be submitted
       return;
     }
+    // Checks pass, submit form
     userAddedRental(formValues);
+    setFormValues(defaultFormValues);
   };
 
   return (

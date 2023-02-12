@@ -1,7 +1,7 @@
 import React from "react";
+import AddToCart from "./AddToCart";
 import { Grid, Typography } from "@mui/material/";
 import PropTypes from "prop-types";
-import AddToCart from "./AddToCart";
 
 export default function BnbRentalContent2({
   id,
@@ -9,6 +9,7 @@ export default function BnbRentalContent2({
   paymentInfo,
   title,
   houseType,
+  addToCartHandler,
 }) {
   const paymentCost = `$${paymentInfo.cost}/day`;
   const paymentNote = `${paymentInfo.description}`;
@@ -38,6 +39,7 @@ export default function BnbRentalContent2({
           title={title}
           fee={paymentInfo.cost}
           city={location.city}
+          addToCartHandler={addToCartHandler}
         />
       </Grid>
     </>
@@ -56,4 +58,5 @@ BnbRentalContent2.propTypes = {
     description: PropTypes.string.isRequired,
   }),
   title: PropTypes.string.isRequired,
+  addToCartHandler: PropTypes.func.isRequired,
 };

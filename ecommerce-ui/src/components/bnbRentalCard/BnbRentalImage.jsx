@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Box, CardMedia } from "@mui/material";
+import PropTypes from "prop-types";
 
-function BnbRentalImage({image, imageAlt}) {
+function BnbRentalImage({ image, imageAlt }) {
   return (
     <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
       <CardMedia
@@ -22,6 +22,6 @@ function BnbRentalImage({image, imageAlt}) {
 export default BnbRentalImage;
 
 BnbRentalImage.propTypes = {
-    imageAlt: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-  };
+  imageAlt: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+};

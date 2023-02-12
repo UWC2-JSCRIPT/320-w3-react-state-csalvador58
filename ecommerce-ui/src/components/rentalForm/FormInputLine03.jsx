@@ -30,7 +30,7 @@ export default function FormInputLine03({
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={4}>
         <TextField
-          error={errorFlagsImage[0]}
+          error={errorFlagsImageAlt[0]}
           fullWidth
           id="image description"
           name="imageAlt"
@@ -40,7 +40,7 @@ export default function FormInputLine03({
           helperText={
             errorFlagsImageAlt[0]
               ? errorFlagsImageAlt[1]
-              : "i.e. Blue home front garden"
+              : "i.e. Blue home with large front porch"
           }
           onChange={onChange}
         />

@@ -20,7 +20,7 @@ export default function FormInputLine04({
           label="City"
           type="text"
           value={cityValue}
-          helperText={errorFlagsCity[0] ? errorFlagsCity[1] : ""}
+          helperText={errorFlagsCity[0] ? errorFlagsCity[1] : " "}
           onChange={onChange}
         />
       </Grid>
@@ -33,7 +33,7 @@ export default function FormInputLine04({
           label="Country"
           type="text"
           value={countryValue}
-          helperText={errorFlagsCountry[0] ? errorFlagsCountry[1] : ""}
+          helperText={errorFlagsCountry[0] ? errorFlagsCountry[1] : " "}
           onChange={onChange}
         />
       </Grid>

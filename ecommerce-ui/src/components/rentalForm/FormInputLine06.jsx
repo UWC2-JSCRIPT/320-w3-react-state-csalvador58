@@ -1,6 +1,6 @@
 import React from "react";
-import { Grid } from "@mui/material";
 import SelectInput from "./SelectInput";
+import { Grid } from "@mui/material";
 import PropTypes from "prop-types";
 
 export default function FormInputLine06({ description, onChange }) {

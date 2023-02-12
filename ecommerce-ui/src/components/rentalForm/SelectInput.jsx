@@ -1,5 +1,5 @@
-import { Box, FormControl, FormLabel, MenuItem, Select } from "@mui/material";
 import React from "react";
+import { Box, FormControl, FormLabel, MenuItem, Select } from "@mui/material";
 import PropTypes from "prop-types";
 
 export default function SelectInput({ freeCancel, inputChange }) {
@@ -12,14 +12,14 @@ export default function SelectInput({ freeCancel, inputChange }) {
         </Box>
       </FormLabel>
       <Select name="description" value={freeCancel} onChange={inputChange}>
-        <MenuItem key="yes" value="free cancellation">
+        <MenuItem key="yes" value="Free cancellation">
           Yes
         </MenuItem>
-        <MenuItem key="no" value="">
+        <MenuItem key="no" value=" ">
           No
         </MenuItem>
-        <MenuItem key="other" value="Contact to discuss cancellation options">
-          Contact to discuss cancellation options.
+        <MenuItem key="other" value="Limited cancellation">
+          Limited cancellation
         </MenuItem>
       </Select>
     </FormControl>

@@ -1,11 +1,19 @@
-import React from "react";
-import { Card, CardContent, Grid, Typography } from "@mui/material/";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
 import BnbRentalImage from "./BnbRentalImage";
 import BnbRentalContent1 from "./BnbRentalContent1";
 import BnbRentalContent2 from "./BnbRentalContent2";
+import RentalCartContext from "../../store/RentalCartContext";
+import {
+  Card,
+  CardContent,
+  Grid,
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@mui/material/";
+import PropTypes from "prop-types";
 
-function BnbRental({
+export default function BnbRental({
   id,
   houseType,
   image,
@@ -15,13 +23,28 @@ function BnbRental({
   stars,
   title,
 }) {
-  const reviews = `Stars: ${stars} / 5`;
+  const rentalCart = useContext(RentalCartContext);
+
+  const reviews = stars ? `Rating: ${stars} / 5` : "New Rental!";
   const rentalLocation = `${location.city}, ${location.country}`;
+
+  const addToCartHandler = () => {
+    rentalCart.addRental({
+      title: title,
+      fee: paymentInfo.cost,
+      city: location.city,
+      numberOfDays: 1,
+    });
+  };
 
   return (
     <>
       <Card elevation={0}>
-        <BnbRentalImage image={image} imageAlt={imageAlt} />
+        <Tooltip title="Yes! Click here to add me to the cart!" placement="top">
+          <IconButton onClick={addToCartHandler}>
+            <BnbRentalImage image={image} imageAlt={imageAlt} />
+          </IconButton>
+        </Tooltip>
         <CardContent sx={{ paddingX: 3 }}>
           <Typography variant="h6" component="h1" paddingBottom={2}>
             {title}
@@ -38,6 +61,7 @@ function BnbRental({
                 paymentInfo={paymentInfo}
                 title={title}
                 houseType={houseType}
+                addToCartHandler={addToCartHandler}
               />
             </Grid>
           </Grid>
@@ -46,8 +70,6 @@ function BnbRental({
     </>
   );
 }
-
-export default BnbRental;
 
 BnbRental.propTypes = {
   id: PropTypes.number.isRequired,
